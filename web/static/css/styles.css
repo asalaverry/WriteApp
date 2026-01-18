@@ -305,7 +305,7 @@ body {
     top: 24px;
     transform: scale(0.9);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 6px;
     padding: 10px;
     background: var(--settings-bg);
@@ -328,7 +328,7 @@ body {
 }
 
 .format-divider {
-    width: 1px;
+    height: 1px;
     background: var(--divider-color);
     margin: 4px 4px;
 }

@@ -48,9 +48,14 @@
     // ================================
     // ZONAS DE DETECCIÓN DEL MOUSE
     // ================================
-    const CORNER_ZONE = {
-        width: 150,
-        height: 150
+    const LEFT_CORNER_ZONE = {
+        width: 190,
+        height: 370
+    };
+
+    const RIGHT_CORNER_ZONE = {
+        width: 200,
+        height: 200
     };
 
     // ================================
@@ -357,15 +362,15 @@
     function isInRightCornerZone(event) {
         const viewportWidth = window.innerWidth;
         return (
-            event.clientX >= viewportWidth - CORNER_ZONE.width &&
-            event.clientY <= CORNER_ZONE.height
+            event.clientX >= viewportWidth - RIGHT_CORNER_ZONE.width &&
+            event.clientY <= RIGHT_CORNER_ZONE.height
         );
     }
 
     function isInLeftCornerZone(event) {
         return (
-            event.clientX <= CORNER_ZONE.width &&
-            event.clientY <= CORNER_ZONE.height
+            event.clientX <= LEFT_CORNER_ZONE.width &&
+            event.clientY <= LEFT_CORNER_ZONE.height
         );
     }
 

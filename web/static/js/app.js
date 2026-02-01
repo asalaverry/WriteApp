@@ -16,6 +16,7 @@
         settingsPanel: document.getElementById('settingsPanel'),
         themeButtons: document.querySelectorAll('[data-theme]'),
         resetBtn: document.getElementById('resetBtn'),
+        downloadBtn: document.getElementById('downloadBtn'),
         formatBar: document.getElementById('formatBar'),
         boldBtn: document.getElementById('boldBtn'),
         italicBtn: document.getElementById('italicBtn'),
@@ -410,6 +411,36 @@
         elements.editor.focus();
     }
 
+        function downloadHtml() {
+                const title = 'Anotador';
+                const content = elements.editor.innerHTML.trim();
+                const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${title}</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.85; color: #1a1a1a; padding: 40px; }
+        .content { max-width: 800px; margin: 0 auto; }
+    </style>
+</head>
+<body>
+    <div class="content">${content || ''}</div>
+</body>
+</html>`;
+
+                const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'anotador.html';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+        }
+
     // ================================
     // EVENT LISTENERS
     // ================================
@@ -525,6 +556,9 @@
         // Click en botón de reiniciar hoja
         elements.resetBtn.addEventListener('click', resetEditor);
 
+        // Click en botón de descargar HTML
+        elements.downloadBtn.addEventListener('click', downloadHtml);
+
         // Cerrar panel al hacer click fuera
         document.addEventListener('click', (event) => {
             if (state.isPanelOpen) {
@@ -559,7 +593,7 @@
     function init() {
         const criticalElements = [
             'body', 'editor', 'settingsTrigger', 'settingsPanel', 
-            'resetBtn', 'formatBar', 'boldBtn', 'italicBtn',
+            'resetBtn', 'downloadBtn', 'formatBar', 'boldBtn', 'italicBtn',
             'increaseFontBtn', 'decreaseFontBtn', 'resetFormatBtn'
         ];
         const missing = criticalElements.filter(key => !elements[key]);

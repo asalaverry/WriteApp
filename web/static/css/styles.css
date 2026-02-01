@@ -11,6 +11,7 @@
     --text-color: #1a1a1a;
     --text-muted: #666666;
     --border-color: rgba(0, 0, 0, 0.08);
+    --option-border-color: rgba(0, 0, 0, 0.08);
     --shadow-color: rgba(0, 0, 0, 0.06);
     --shadow-hover: rgba(0, 0, 0, 0.12);
     --accent-color: #0066cc;
@@ -32,9 +33,10 @@
 [data-theme="dark"] {
     --bg-color: #0d0d0d;
     --page-color: #1a1a1a;
-    --text-color: #e8e8e8;
+    --text-color: #e8e8e8; /* Color de logo de tema */
     --text-muted: #999999;
-    --border-color: rgba(255, 255, 255, 0.08);
+    --border-color: rgba(255, 255, 255, 0.079); /* Color de borde */
+    --option-border-color: rgba(0, 0, 0, 0.08);
     --shadow-color: rgba(0, 0, 0, 0.3);
     --shadow-hover: rgba(0, 0, 0, 0.5);
     --settings-bg: rgba(30, 30, 30, 0.95);
@@ -42,6 +44,15 @@
     --option-active: rgba(100, 180, 255, 0.15);
     --divider-color: rgba(255, 255, 255, 0.1);
     --accent-color: #64b4ff;
+}
+
+/* Bordes específicos para cada botón cuando el tema actual es oscuro */
+[data-theme="dark"] .option-btn[data-theme="light"] {
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+[data-theme="dark"] .option-btn[data-theme="night"] {
+    border-color: rgba(255, 255, 255, 0.18);
 }
 
 /* Modo Noche (blanco cálido - como luz nocturna) */
@@ -267,7 +278,7 @@ body {
     width: 40px;
     height: 40px;
     background: transparent;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--option-border-color);
     border-radius: 10px;
     cursor: pointer;
     transition: 
@@ -411,7 +422,32 @@ body {
         border-color var(--transition-fast);
 }
 
+.download-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 16px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: 
+        background-color var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
 .reset-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.download-btn svg {
     width: 16px;
     height: 16px;
 }
@@ -420,6 +456,12 @@ body {
     background: rgba(220, 80, 80, 0.1);
     border-color: rgba(220, 80, 80, 0.3);
     color: #dc5050;
+}
+
+.download-btn:hover {
+    background: var(--option-hover);
+    border-color: var(--border-color);
+    color: var(--text-color);
 }
 
 /* --- Animaciones sutiles --- */
@@ -465,6 +507,7 @@ body {
 /* --- Focus visible para accesibilidad --- */
 .option-btn:focus-visible,
 .reset-btn:focus-visible,
+.download-btn:focus-visible,
 .settings-trigger:focus-visible {
     outline: 2px solid var(--accent-color);
     outline-offset: 2px;
